@@ -1,57 +1,38 @@
-// fn main() {
-//     let mut s = String::from("hello world");
-//
-//     let word = first_word(&s);
-//     s.clear();
-//
-//     // created slice using range -> [starting_index, ending_index)
-//     let hello: &str = &s[0..5];
-//     let word: &str = &s[6..11];
-//     let s2: &String = &s;
-// }
-
-//
-// fn first_word(s: &String) -> usize {
-//     let bytes = s.as_bytes();
-//
-//     for (i, &item) in bytes.iter().enumerate() {
-//         if item == b' ' {
-//             return i;
-//         }
-//     }
-//     s.len()
-// }
-//      same func using slices
-fn first_word(s: &String) -> &str {
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
-    
-    &s[..]
+// Return a borrowed slice instead of an index, so callers can use the word directly.
+fn first_word(text: &str) -> &str {
+    text.split_whitespace().next().unwrap_or("")
 }
 
 fn main() {
-    let my_string= String::from("hello world!");
+    let sentence = String::from("hello, Rustacean!");
 
-    // `first_word` works on slices of `String`s, whether partial or whole
-    let word = first_word(&my_string[0..6]);
-    let word = first_word(&my_string[..]);
-    // first_word also works on references to String, which are equivalent
-    // to whole slices of String
-    let word = first_word(&my_string);
+    // Ranges use a start-inclusive, end-exclusive form: 0..5 selects "hello".
+    let greeting = &sentence[0..5];
+    let remainder = &sentence[7..];
+    println!("Greeting: {greeting}; remainder: {remainder}");
 
-    let my_string_literal = "hello world";
+    // A string literal is already a string slice (`&str`).
+    let literal: &str = "slices borrow data";
+    println!("First word in the literal: {}", first_word(literal));
 
-    // `first_word` works on slices of string literals, whether partial or
-    // whole.
-    let word = first_word(&my_string_literal[0..6]);
-    let word = first_word(&my_string_literal[..]);
+    // `&str` accepts a slice borrowed from a String as well as a string literal.
+    let word = first_word(&sentence);
+    println!("First word in the String: {word}");
 
-    // Because string literals *are* string slices already,
-    // this works too, without the slice syntax!
-    let word = first_word(my_string_literal);
+    // The returned slice borrows from `sentence`; it remains valid while that
+    // immutable borrow is in use. Rust prevents conflicting mutation meanwhile.
+    println!("The complete sentence is still available: {sentence}");
+
+    // Array slices borrow a consecutive portion of an array.
+    let scores = [8, 13, 21, 34, 55];
+    let middle_scores = &scores[1..4];
+    println!("Middle scores: {middle_scores:?}");
+    println!("All scores: {scores:?}");
+
+    // `split_whitespace` handles empty input and Unicode whitespace safely.
+    println!(
+        "First word of a Unicode sentence: {}",
+        first_word("γειά κόσμε")
+    );
+    println!("First word of empty text: '{}'", first_word(""));
 }
