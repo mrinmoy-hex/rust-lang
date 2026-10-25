@@ -1,53 +1,47 @@
 fn main() {
-    // let mut count = 0;
-    // 'counting_up: loop {
-    //     println!("count = {count}");
-    //     let mut remaining = 10;
+    // `loop` repeats until a `break`; `break` can return a value from the loop.
+    let mut attempts = 0;
+    let result = loop {
+        attempts += 1;
+        if attempts == 3 {
+            break format!("finished after {attempts} attempts");
+        }
+    };
+    println!("{result}");
 
-    //     loop {
-    //         println!("remaining = {remaining}");
-    //         if remaining == 9 {
-    //             break;
-    //         }
-    //         if count == 2 {
-    //             break 'counting_up;
-    //         }
-    //         remaining -= 1;
-    //     }
+    // A label lets an inner loop stop an enclosing loop.
+    let mut searched = false;
+    'rows: for row in 0..3 {
+        for column in 0..3 {
+            println!("Checking row {row}, column {column}");
+            if row == 1 && column == 2 {
+                searched = true;
+                break 'rows;
+            }
+        }
+    }
+    println!("Target found: {searched}");
 
-    //     count += 1;
-    // }
-    // println!("End count = {count}");
+    // `while` is useful when the number of iterations depends on a condition.
+    let mut countdown = 3;
+    while countdown > 0 {
+        println!("{countdown}...");
+        countdown -= 1;
+    }
+    println!("Liftoff!");
 
-    // while loops
-    let mut number = 3;
+    // A `for` loop walks over each element without managing an index.
+    let temperatures = [17, 19, 20, 18, 16];
+    for temperature in temperatures {
+        println!("Today's temperature: {temperature}°C");
+    }
 
-    // while number != 0 {
-    //     println!("{number}!");
-    //     number -= 1;
-    // }
+    // Ranges are exclusive at the end; use `..=` when the end should be included.
+    let sum: i32 = (1..=5).sum();
+    println!("Sum of 1 through 5: {sum}");
 
-    // println!("LIFTOFF!!!");
-    // alt way using for loops
+    // Reverse a range to count down without changing a separate index.
     for number in (1..4).rev() {
-        println!("{}", number);
+        println!("{number}!");
     }
-    println!("LIFTOFF!!!");
-
-    let a = [10, 20, 30, 40, 50];
-    let mut index = 0;
-
-    while index < 5 {
-        println!("the value is: {}", a[index]);
-
-        index += 1;
-    }
-
-    // for loops
-    let b = [10, 20, 30, 40, 50];
-
-    for element in b {
-        println!("the value is: {element}");
-    }
-
 }
