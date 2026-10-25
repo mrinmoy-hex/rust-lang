@@ -20,6 +20,10 @@ fn main() {
         let y = 1;
         y + 1
     }));
+
+    // A function can return a boolean expression directly too.
+    let age = 20;
+    println!("Is age {age} at least 18? {}", is_adult(age));
 }
 
 fn another_function(x: i32) {
@@ -29,4 +33,8 @@ fn another_function(x: i32) {
 
 fn print_labeled_measurement(value: i32, unit_label: char) {
     println!("The measurement is: {value}{unit_label}");
+}
+
+fn is_adult(age: u8) -> bool {
+    age >= 18
 }

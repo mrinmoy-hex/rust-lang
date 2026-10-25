@@ -46,7 +46,10 @@ fn main() {
     let coin_1 = Coin::Quarter(UsState::Alaska);
     println!("Value in {}", value_in_cents(coin_1));
 
+    // `None` is a real case to handle, not an error or a magic number.
     println!("Add result = {}", add(30, Some(20)));
+    println!("Adding nothing leaves the total unchanged: {}", add(30, None));
+    println!("A dime is worth {} cents.", value_in_cents(Coin::Dime));
 
     // A catch-all arm handles every dice value not listed explicitly.
     let dice_roll = 3;

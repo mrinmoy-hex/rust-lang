@@ -15,6 +15,10 @@ fn main() {
 
     let s1: String = String::from("hello");
     let s2: String = s1;        // `String` moves; `s1` cannot be used afterward.
+
+    // `clone` makes a separate heap allocation when you really need two Strings.
+    let s3 = s2.clone();
+    println!("Copied integer: {y}; moved string: {s2}; cloned string: {s3}");
     
     let str1 = gives_ownership();
     let str2 = String::from("hello");

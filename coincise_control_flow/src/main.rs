@@ -31,4 +31,11 @@ fn main() {
     } else {
         count += 1;
     }
+
+    // Use `match` when both possibilities matter; `None` gets its own clear path.
+    let optional_name = None::<&str>;
+    match optional_name {
+        Some(name) => println!("Hello, {name}!"),
+        None => println!("No name was provided, so we'll use a friendly default."),
+    }
 }

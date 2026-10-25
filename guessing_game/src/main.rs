@@ -36,4 +36,7 @@ fn main() {
             },
         }
     }
+
+    // `break` leaves the loop, so execution continues here after a correct guess.
+    println!("Thanks for playing! The secret number was {secret_number}.");
 }
