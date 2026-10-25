@@ -37,11 +37,7 @@ fn add(num1: i32, num2: Option<i32>) -> i32 {
     }
 }
 
-/*
- *  Matches are exhaustive => the arms' patterns must cover all possibilities
- *
- *
- * */
+// Match arms must cover every possible value; `_` handles any remaining cases.
 
 fn main() {
     let coin = Coin::Penny;
@@ -52,7 +48,7 @@ fn main() {
 
     println!("Add result = {}", add(30, Some(20)));
 
-    // dice-rool program
+    // A catch-all arm handles every dice value not listed explicitly.
     let dice_roll = 3;
     match dice_roll {
         3 => println!("You got a fancy hat 🧢"),

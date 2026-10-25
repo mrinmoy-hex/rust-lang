@@ -1,27 +1,20 @@
-/* 
-Ownership is a discipline for safely using memory within 
+/*
+Ownership is Rust's system for managing values and their lifetimes.
 
-In Rust, it doesn't allow to interpret memory as an array of bytes, for instance.
+1. Each value has one owner at a time.
+2. Assigning a non-`Copy` value to another binding moves ownership.
+3. When the owner goes out of scope, the value is dropped.
 
-Variables live in frames. A frame is a mapping from variables to values within a single scope, such as a function.
-
-Frames are organized into a stack of currently-called-functions.
-
--------------- Ownership rules -------------------
-
-1. Each value in Rust has a variable that's called its owner.
-2. There can only be one owner at a time.
-3. When the owner goes out of scope, the value will be dropped.
-
+Types that implement `Copy`, such as `i32`, are copied on assignment instead.
 */
 
 fn main() {
     let x: i32 = 5;
-    let y: i32 = x;     // copy
+    let y: i32 = x;     // `i32` implements `Copy`, so `x` remains usable.
     //
 
     let s1: String = String::from("hello");
-    let s2: String = s1;        // move (not shallow copy)
+    let s2: String = s1;        // `String` moves; `s1` cannot be used afterward.
     
     let str1 = gives_ownership();
     let str2 = String::from("hello");

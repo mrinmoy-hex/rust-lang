@@ -2,12 +2,11 @@ fn main() {
     let mut s1 = String::from("hello");
     change(&mut s1);
 
-    // cannot create multiple mutable references
+    // Only one mutable reference may be active at a time.
     let r1 = &mut s1;
     // let r2 = &mut s1;
 
-    // ok: to have multiple immutable references
-    // error: to have mutable and immutable references along 
+    // Multiple immutable references are allowed, but cannot overlap a mutable borrow.
 
     println!("{},", r1);
 }

@@ -19,7 +19,7 @@ fn main() {
     //     _ => (),
     // }
 
-    // using if let => lose the exhaustive checking that match used to ensures
+    // `if let` is concise for one pattern, but unlike `match` it does not handle every case.
     if let Some(max) = config_max {
         println!("The maximum is configured to be {max}");
     }

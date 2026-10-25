@@ -11,7 +11,7 @@ fn main() {
         println!("number is not divisible by 4, 3, or 2");
     }
 
-    // using if in a let stmt
+    // An `if` expression can initialize a binding; both branches must have the same type.
     let conditon = true;
     let number = if conditon { 5 } else { 6 };
 

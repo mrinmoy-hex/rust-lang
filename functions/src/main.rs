@@ -1,3 +1,4 @@
+// A function can return its final expression without writing `return`.
 fn f(x: i32) -> i32 { x + 1 }
 
 fn main() {
@@ -7,6 +8,7 @@ fn main() {
 
     print_labeled_measurement(5, 'h');
 
+    // The final expression in a block becomes that block's value.
     let y = {
         let x = 3;
         x + 1
